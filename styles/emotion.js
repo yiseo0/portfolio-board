@@ -24,7 +24,7 @@ export const Form = styled.form`
    justify-content: space-between;
 `
 
-export const WriteWrapper = styled.div`
+export const WriteBox = styled.div`
    width: ${props => props.row ? `calc(100%/${props.row} - ${props.row * 6}px)` : '100%'};
    &:not(:last-child) {
       margin-bottom: 40px;
@@ -55,6 +55,10 @@ export const Write = styled.input`
    &::placeholder {
       color: #BDBDBD;
    }
+`
+
+export const Error = styled.small`
+   color: red;
 `
 
 export const WriteContent = styled.textarea`
