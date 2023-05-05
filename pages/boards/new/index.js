@@ -1,81 +1,35 @@
 import { Form, Button, WriteBox, Title, Wrapper, Write, WriteContent, WriteAddress, Label, Upload, RadioLabel, Radio, ButtonSubmit, Error } from "@/styles/emotion";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 export default function BoardNew() {
-   const [data, setData] = useState({
-      name: '',
-      password: '',
-      title: '',
-      content: '',
-   })
-   const [errorName, setErrorName] = useState('')
-   const [errorPw, setErrorPw] = useState('')
-   const [errorTitle, setErrorTitle] = useState('')
-   const [errorContent, setErrorContent] = useState('')
-
-   const { name, password, title, content } = data
-
-
-   const onChange = e => {
-      const { name, value } = e.target
-      setData(data => ({
-         ...data,
-         [name]: value
-      }))
-      if (name) {
-         setErrorName('')
-      }
-      if (password) {
-         setErrorPw('')
-      }
-      if (title) {
-         setErrorTitle('')
-      }
-      if (content) {
-         setErrorContent('')
-      }
-   }
-
-   const onSubmit = e => {
-      e.preventDefault()
-      if (!name) {
-         setErrorName('이름을 입력해주세요.')
-      }
-      if (!password) {
-         setErrorPw('비밀번호를 입력해주세요.')
-      }
-      if (!title) {
-         setErrorTitle('제목을 작성해주세요.')
-      }
-      if (!content) {
-         setErrorContent('내용을 작성해주세요.')
-      }
+   const { register, handleSubmit, formState: { errors } } = useForm()
+   const onSubmit = data => {
+      // console.log(data)
    }
 
    return (
       <Wrapper>
          <Title>게시물 등록</Title>
-         <Form method="POST" onSubmit={onSubmit}>
+         <Form method="POST" onSubmit={handleSubmit(onSubmit)}>
             <WriteBox row="2">
                <Label htmlFor="">작성자</Label>
-               <Write type="text" placeholder="이름을 입력해주세요." name="name" value={name} onChange={onChange} />
-               <Error>{errorName}</Error>
+               <Write type="text" placeholder="이름을 입력해주세요." {...register("name", { required: "이름을 입력해주세요." })} />
+               <Error>{errors.name?.message}</Error>
             </WriteBox>
             <WriteBox row="2">
                <Label htmlFor="">비밀번호</Label>
-               <Write type="password" placeholder="비밀번호를 입력해주세요." name="password" value={password} onChange={onChange} />
-               <Error>{errorPw}</Error>
+               <Write type="password" placeholder="비밀번호를 입력해주세요." {...register("password", { required: "비밀번호를 입력해주세요." })} />
+               <Error>{errors.password?.message}</Error>
             </WriteBox>
             <WriteBox>
                <Label htmlFor="">제목</Label>
-               <Write type="text" placeholder="제목을 작성해주세요." name="title" value={title} onChange={onChange} />
-               <Error>{errorTitle}</Error>
+               <Write type="text" placeholder="제목을 작성해주세요." {...register("title", { required: "제목을 작성해주세요." })} />
+               <Error>{errors.title?.message}</Error>
             </WriteBox>
             <WriteBox>
                <Label htmlFor="">내용</Label>
-               <WriteContent type="text" placeholder="내용을 작성해주세요." name="content" value={content} onChange={onChange} />
-               <Error>{errorContent}</Error>
+               <WriteContent type="text" placeholder="내용을 작성해주세요." {...register("content", { required: "내용을 작성해주세요." })} />
+               <Error>{errors.content?.message}</Error>
             </WriteBox>
             <WriteBox>
                <Label htmlFor="">주소</Label>
