@@ -31,11 +31,31 @@ import {
   Stars,
   Wrapper,
 } from "@/styles/emotion";
+import { gql, useQuery } from "@apollo/client";
+import { useRouter } from "next/router";
 import { useState } from "react";
 
+const FETCH_BOARD = gql`
+  query fetchBoard($boardId: ID!) {
+    fetchBoard(boardId: $boardId) {
+      writer
+      updatedAt
+      title
+      contents
+    }
+  }
+`;
+
 export default function BoardDetail() {
+  const router = useRouter();
+  const { data } = useQuery(FETCH_BOARD, {
+    variables: {
+      boardId: router.query.id,
+    },
+  });
   const [toggle, setToggle] = useState(false);
   const [star, setStar] = useState(0);
+
   return (
     <>
       <Wrapper>
@@ -43,8 +63,8 @@ export default function BoardDetail() {
           <ProfileThumbDefault />
 
           <BoardDetailHeadCenter>
-            <p className="writer">노원두</p>
-            <p className="update-date">Date : 2021.02.18</p>
+            <p className="writer">{data?.fetchBoard.writer}</p>
+            <p className="update-date">{data?.fetchBoard.updatedAt}</p>
           </BoardDetailHeadCenter>
 
           <BoardDetailHeadRight>
@@ -59,8 +79,8 @@ export default function BoardDetail() {
         </BoardDetailHead>
 
         <BoardDetailBody>
-          <h3 className="title">게시글 제목입니다.</h3>
-          <div className="content">컨텐츠</div>
+          <h3 className="title">{data?.fetchBoard.title}</h3>
+          <div className="content">{data?.fetchBoard.contents}</div>
 
           <LikeButtonWrap>
             <LikeButton like="like">
@@ -112,7 +132,13 @@ export default function BoardDetail() {
         {/* <CommentCreate>
           <CommentCreateInput type="text" name="" placeholder="작성자" />
           <CommentCreateInput type="password" name="" placeholder="비밀번호" />
-          <Star onCLick={() => setStar()}/>
+          <Stars star={star}>
+            {Array(5)
+              .fill(0)
+              .map((_, idx) => (
+                <Star key={idx} onClick={() => setStar(idx + 1)} />
+              ))}
+          </Stars>
           <CommentCreateTextarea
             cols="30"
             rows="10"
