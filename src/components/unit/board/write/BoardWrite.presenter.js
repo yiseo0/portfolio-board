@@ -1,4 +1,4 @@
-import * as S from "./BoardWrite.style";
+import * as S from "./BoardWrite.styles";
 
 export default function BoardWriteUI({
   register,

@@ -2,7 +2,7 @@ import BoardWriteUI from "./BoardWrite.presenter";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
-import CREATE_BOARD from "./BoardWrite.query";
+import CREATE_BOARD from "./BoardWrite.queries";
 
 export default function BoardWrite() {
   const router = useRouter();

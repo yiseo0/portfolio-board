@@ -1,4 +1,4 @@
-import * as S from "./BoardDetail.style";
+import * as S from "./BoardDetail.styles";
 
 export default function BoardDetailUI({
   data,
