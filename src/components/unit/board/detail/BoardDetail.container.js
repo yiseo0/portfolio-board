@@ -1,8 +1,8 @@
 import BoardDetailUI from "./BoardDetail.presenter";
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import FETCH_BOARD from "./BoardDetail.queries";
+import { DELETE_BOARD, FETCH_BOARD } from "./BoardDetail.queries";
 
 export default function BoardDetail() {
   const router = useRouter();
@@ -11,8 +11,20 @@ export default function BoardDetail() {
       boardId: router.query.id,
     },
   });
+
+  const [delete_board] = useMutation(DELETE_BOARD);
   const [toggle, setToggle] = useState(false);
   const [star, setStar] = useState(0);
+
+  const onDelete = () => {
+    delete_board({
+      variables: {
+        boardId: router.query.id,
+      },
+    });
+    alert("게시물이 삭제되었습니다.")
+    router.push('/boards')
+  };
 
   return (
     <BoardDetailUI
@@ -21,6 +33,7 @@ export default function BoardDetail() {
       setToggle={setToggle}
       star={star}
       setStar={setStar}
+      onDelete={onDelete}
     />
   );
 }

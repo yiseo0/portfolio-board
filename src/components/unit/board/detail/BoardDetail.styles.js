@@ -15,8 +15,8 @@ export const Wrapper = styled.div`
 export const Write = styled.input`
   width: 100%;
   height: 52px;
-  padding: 0 14px;
   border: 1px solid #bdbdbd;
+  padding: 0 14px;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;

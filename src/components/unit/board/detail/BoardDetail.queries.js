@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-const FETCH_BOARD = gql`
+export const FETCH_BOARD = gql`
   query fetchBoard($boardId: ID!) {
     fetchBoard(boardId: $boardId) {
       writer
@@ -11,4 +11,8 @@ const FETCH_BOARD = gql`
   }
 `;
 
-export default FETCH_BOARD;
+export const DELETE_BOARD = gql`
+  mutation DeleteBoard($boardId: ID!) {
+    deleteBoard(boardId: $boardId)
+  }
+`;

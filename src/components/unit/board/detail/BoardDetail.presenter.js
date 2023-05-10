@@ -6,6 +6,7 @@ export default function BoardDetailUI({
   setToggle,
   star,
   setStar,
+  onDelete,
 }) {
   return (
     <>
@@ -48,7 +49,7 @@ export default function BoardDetailUI({
       <S.BoardDetailButtonWrap>
         <S.BoardDetailButton>목록으로</S.BoardDetailButton>
         <S.BoardDetailButton>수정하기</S.BoardDetailButton>
-        <S.BoardDetailButton>삭제하기</S.BoardDetailButton>
+        <S.BoardDetailButton onClick={onDelete}>삭제하기</S.BoardDetailButton>
       </S.BoardDetailButtonWrap>
 
       <S.BoardDetailCommentWrap>

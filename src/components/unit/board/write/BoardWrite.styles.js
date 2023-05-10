@@ -158,4 +158,5 @@ export const RadioLabel = styled.label`
 export const ButtonSubmit = styled(Button)`
   width: 179px;
   margin: 0 auto;
+  border: 0;
 `;
