@@ -1,7 +1,8 @@
 import Link from "next/link";
 import * as S from "./BoardList.style";
+import { getDate } from "@/src/commons/libraries/utils";
 
-export default function BoardListUI({ data }) {
+export default function BoardListUI({ data, onClickMoveToDetail, onClickMoveToWrite }) {
   console.log(data);
   return (
     <S.Wrapper>
@@ -30,12 +31,14 @@ export default function BoardListUI({ data }) {
           </tr>
         </thead>
         <tbody>
-          {data?.fetchBoards.map((list) => (
+          {data?.fetchBoards.map((list, idx) => (
             <tr key={list._id}>
-              <td>{}</td>
-              <td>{list.title}</td>
+              <td>{data.fetchBoards.length - idx}</td>
+              <S.ColumnTitle onClick={() => onClickMoveToDetail(list._id)}>
+                {list.title}
+              </S.ColumnTitle>
               <td>{list.writer}</td>
-              <td>{list.updatedAt}</td>
+              <td>{getDate(list.updatedAt)}</td>
             </tr>
           ))}
         </tbody>
@@ -51,11 +54,9 @@ export default function BoardListUI({ data }) {
             <img src="/icon/icon_navi_next.svg" alt="" />
           </S.PagingItem>
         </S.Paging>
-        <S.ButtonWrite>
+        <S.ButtonWrite onClick={onClickMoveToWrite}>
           <img src="/icon/icon_create.svg" alt="" />
-          <Link href="/boards/new">
           게시물 등록하기
-          </Link>
         </S.ButtonWrite>
       </S.TableBottom>
     </S.Wrapper>

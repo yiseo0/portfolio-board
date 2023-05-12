@@ -155,7 +155,12 @@ export const RadioLabel = styled.label`
   }
 `;
 
-export const ButtonSubmit = styled(Button)`
+export const BoardBtnBox = styled.div`
+  display: flex;
+  gap: 24px;
+  margin: 0 auto;
+`;
+export const BoardBtn = styled(Button)`
   width: 179px;
   margin: 0 auto;
   border: 0;

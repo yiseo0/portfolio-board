@@ -22,8 +22,16 @@ export default function BoardDetail() {
         boardId: router.query.id,
       },
     });
-    alert("게시물이 삭제되었습니다.")
-    router.push('/boards')
+    alert("게시물이 삭제되었습니다.");
+    router.push("/boards");
+  };
+
+  const onClickMoveToEdit = () => {
+    router.push(`/boards/${router.query.id}/edit`);
+  };
+
+  const onClickMoveToList = () => {
+    router.push(`/boards`);
   };
 
   return (
@@ -34,6 +42,8 @@ export default function BoardDetail() {
       star={star}
       setStar={setStar}
       onDelete={onDelete}
+      onClickMoveToEdit={onClickMoveToEdit}
+      onClickMoveToList={onClickMoveToList}
     />
   );
 }

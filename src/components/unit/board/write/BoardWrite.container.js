@@ -2,9 +2,9 @@ import BoardWriteUI from "./BoardWrite.presenter";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
-import CREATE_BOARD from "./BoardWrite.queries";
+import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.queries";
 
-export default function BoardWrite() {
+export default function BoardWrite({ isEdit, data }) {
   const router = useRouter();
   const {
     register,
@@ -12,9 +12,11 @@ export default function BoardWrite() {
     formState: { errors },
   } = useForm();
   const [createBoard] = useMutation(CREATE_BOARD);
+  const [updateBoard] = useMutation(UPDATE_BOARD);
+
   const onSubmit = async (data) => {
+    const { writer, password, title, contents } = data;
     try {
-      const { writer, password, title, contents } = data;
       const result = await createBoard({
         variables: {
           createBoardInput: {
@@ -25,6 +27,7 @@ export default function BoardWrite() {
           },
         },
       });
+
       alert("게시물 등록이 완료되었습니다.");
       router.push(`/boards/${result.data.createBoard._id}`);
     } catch (error) {
@@ -32,12 +35,42 @@ export default function BoardWrite() {
     }
   };
 
+  const onSubmitUpdate = async (data) => {
+    const { title, contents } = data;
+
+    const updateBoardInput = {};
+    if (title) updateBoardInput.title = title;
+    if (contents) updateBoardInput.contents = contents;
+
+    try {
+      const result = await updateBoard({
+        variables: {
+          updateBoardInput,
+          password: data.password,
+          boardId: router.query.id,
+        },
+      });
+      alert("게시물 수정이 완료되었습니다.");
+      router.push(`/boards/${result.data.updateBoard._id}`);
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
+  const onClickMoveToList = () => {
+    router.push('/boards')
+  }
+
   return (
     <BoardWriteUI
+      isEdit={isEdit}
+      data={data}
       register={register}
       handleSubmit={handleSubmit}
       errors={errors}
       onSubmit={onSubmit}
+      onSubmitUpdate={onSubmitUpdate}
+      onClickMoveToList={onClickMoveToList}
     />
   );
 }

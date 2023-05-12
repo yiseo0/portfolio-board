@@ -81,6 +81,11 @@ export const Table = styled.table`
 export const TableBottom = styled.div`
   position: relative;
 `;
+
+export const ColumnTitle = styled.td`
+  cursor: pointer;
+`;
+
 export const Paging = styled.div`
   display: flex;
   justify-content: center;
@@ -117,11 +122,7 @@ export const ButtonWrite = styled.button`
   border: 1px solid #f2f2f2;
   border-radius: 10px;
   background: none;
-
-  a {
-    color: #000;
-    text-decoration: none;
-  }
+  cursor: pointer;
 
   img {
     vertical-align: sub;
