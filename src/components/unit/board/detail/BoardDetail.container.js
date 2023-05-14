@@ -2,7 +2,10 @@ import BoardDetailUI from "./BoardDetail.presenter";
 import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { DELETE_BOARD, FETCH_BOARD } from "./BoardDetail.queries";
+import {
+  DELETE_BOARD,
+  FETCH_BOARD,
+} from "./BoardDetail.queries";
 
 export default function BoardDetail() {
   const router = useRouter();
@@ -14,7 +17,6 @@ export default function BoardDetail() {
 
   const [delete_board] = useMutation(DELETE_BOARD);
   const [toggle, setToggle] = useState(false);
-  const [star, setStar] = useState(0);
 
   const onDelete = () => {
     delete_board({
@@ -39,8 +41,6 @@ export default function BoardDetail() {
       data={data}
       toggle={toggle}
       setToggle={setToggle}
-      star={star}
-      setStar={setStar}
       onDelete={onDelete}
       onClickMoveToEdit={onClickMoveToEdit}
       onClickMoveToList={onClickMoveToList}
