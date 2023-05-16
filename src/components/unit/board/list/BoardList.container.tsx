@@ -6,7 +6,8 @@ import { useRouter } from "next/router";
 export default function BoardList() {
   const router = useRouter();
   const { data } = useQuery(FETCH_BOARDS);
-  const onClickMoveToDetail = (boardId) => {
+  
+  const onClickMoveToDetail = (boardId : string) => {
     router.push(`/boards/${boardId}`);
   };
   const onClickMoveToWrite = () => {

@@ -1,12 +1,12 @@
-import CommentListUI from "./BoardCommentList.presenter";
+import CommentListUI from "./CommentList.presenter";
 import {
   DELETE_BOARD_COMMENT,
   FETCH_BOARD_COMMENTS,
-} from "./BoardCommentList.queries";
+} from "./CommentList.queries";
 import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 
-export default function BoardCommentList() {
+export default function CommentList() {
   const router = useRouter();
 
   const { data } = useQuery(FETCH_BOARD_COMMENTS, {
@@ -17,7 +17,7 @@ export default function BoardCommentList() {
   const [deleteBoardComment] = useMutation(DELETE_BOARD_COMMENT);
 
 
-  const onClickDelete = async (id) => {
+  const onClickDelete = async (id : string) => {
     try {
       const password = prompt("비밀번호를 입력해주세요.");
 

@@ -3,8 +3,9 @@ import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.queries";
+import { IBoardWriteProps, IUpdateBoardInput } from "./BoardWrite.types";
 
-export default function BoardWrite({ isEdit, data }) {
+export default function BoardWrite({ isEdit, data }: IBoardWriteProps) {
   const router = useRouter();
   const {
     register,
@@ -14,7 +15,7 @@ export default function BoardWrite({ isEdit, data }) {
   const [createBoard] = useMutation(CREATE_BOARD);
   const [updateBoard] = useMutation(UPDATE_BOARD);
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data : any) => {
     const { writer, password, title, contents } = data;
     try {
       const result = await createBoard({
@@ -30,15 +31,15 @@ export default function BoardWrite({ isEdit, data }) {
 
       alert("게시물 등록이 완료되었습니다.");
       router.push(`/boards/${result.data.createBoard._id}`);
-    } catch (error) {
+    } catch (error : any) {
       alert(error.message);
     }
   };
 
-  const onSubmitUpdate = async (data) => {
+  const onSubmitUpdate = async (data : any) => {
     const { title, contents } = data;
 
-    const updateBoardInput = {};
+    const updateBoardInput : IUpdateBoardInput= {};
     if (title) updateBoardInput.title = title;
     if (contents) updateBoardInput.contents = contents;
 
@@ -52,7 +53,7 @@ export default function BoardWrite({ isEdit, data }) {
       });
       alert("게시물 수정이 완료되었습니다.");
       router.push(`/boards/${result.data.updateBoard._id}`);
-    } catch (error) {
+    } catch (error : any) {
       alert(error.message);
     }
   };

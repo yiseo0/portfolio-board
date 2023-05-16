@@ -9,9 +9,7 @@ export const ItemWrapper = styled.div`
   margin: 0 auto;
   border-bottom: 1px solid #bdbdbd;
 `;
-
 export const Avatar = styled.img``;
-
 export const MainWrapper = styled.div`
   flex-grow: 1;
   .writer {
@@ -36,7 +34,6 @@ export const MainWrapper = styled.div`
     color: #bdbdbd;
   }
 `;
-
 export const OptionWrapper = styled.div`
   i ~ i {
     margin-left: 8px;
@@ -47,6 +44,7 @@ export const Icon = styled.img`
   vertical-align: middle;
   cursor: pointer;
 `;
-export const IconDelete = styled(Icon)`
+export const DeleteIcon = styled(Icon)`
   margin-left: 8px;
 `;
+export const UpdateIcon = styled(Icon)``;

@@ -1,7 +1,7 @@
-import * as S from "./BoardCommentWriter.styles";
+import * as S from "./CommentWriter.styles";
+import { ICommentWriterUIProps } from "./CommentWriter.types";
 
-export default function BoardCommentWriterUI(props) {
-  const { comment, setComment, onChangeComment, onClickCreateComment } = props;
+export default function CommentWriterUI({ comment, setComment, onChangeComment, onClickCreateComment }: ICommentWriterUIProps) {
 
   return (
     <div>

@@ -1,4 +1,5 @@
 import * as S from "./BoardWrite.styles";
+import { IBoardWriteUIProps } from "./BoardWrite.types";
 
 export default function BoardWriteUI({
   isEdit,
@@ -9,7 +10,7 @@ export default function BoardWriteUI({
   onSubmit,
   onSubmitUpdate,
   onClickMoveToList
-}) {
+} : IBoardWriteUIProps) {
   console.log(data);
   return (
     <S.Wrapper>

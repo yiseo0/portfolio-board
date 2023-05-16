@@ -1,14 +1,15 @@
-import { Fragment } from "react";
 import * as S from "./BoardDetail.styles";
+import { IBoardDetailUIProps } from "./BoardDetail.types";
 
-export default function BoardDetailUI({
-  data,
-  toggle,
-  setToggle,
-  onDelete,
-  onClickMoveToEdit,
-  onClickMoveToList,
-}) {
+export default function BoardDetailUI(props : IBoardDetailUIProps) {
+  const {
+    data,
+    toggle,
+    setToggle,
+    onDelete,
+    onClickMoveToEdit,
+    onClickMoveToList,
+  } = props
   return (
     <>
       <S.Wrapper>
@@ -24,7 +25,7 @@ export default function BoardDetailUI({
             <S.Icon src="/images/board/detail/icon_link.svg" />
             <S.IconMap
               src="/images/board/detail/icon_map.svg"
-              onClick={() => setToggle(!toggle)}
+              onClick={(toggle) => setToggle(!toggle)}
             />
             <S.MapTooltip state={toggle && "block"}>
               서울특별시 영등포구 양산로 200

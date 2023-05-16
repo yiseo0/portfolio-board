@@ -1,7 +1,8 @@
-import { Stars } from "../writer/BoardCommentWriter.styles";
-import * as S from "./BoardCommentList.styles";
+import { Stars } from "../writer/CommentWriter.styles";
+import { ICommentListUIProps } from "./CommentList.types";
+import * as S from "./CommentList.styles";
 
-export default function BoardCommentListUI(props) {
+export default function CommentListUI(props: ICommentListUIProps) {
   const { data, onClickDelete } = props;
   return (
     <>
@@ -29,7 +30,7 @@ export default function BoardCommentListUI(props) {
        </CommentCreateTextareaBottom>
      </CommentCreate> */}
 
-      {data?.fetchBoardComments.map((el) => (
+      {data?.fetchBoardComments.map((el: any) => (
         <S.ItemWrapper key={el._id}>
           <S.Avatar src="/images/commons/avatar.svg" />
           <S.MainWrapper>
@@ -41,8 +42,8 @@ export default function BoardCommentListUI(props) {
             <p className="update-date">{el.updatedAt}</p>
           </S.MainWrapper>
           <S.OptionWrapper>
-            <S.Icon src="/images/boardComment/list/icon_option_update.svg" />
-            <S.IconDelete
+            <S.UpdateIcon src="/images/boardComment/list/icon_option_update.svg" />
+            <S.DeleteIcon
               src="/images/boardComment/list/icon_option_delete.svg"
               onClick={() => onClickDelete(el._id)}
             />

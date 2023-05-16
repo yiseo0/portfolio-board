@@ -1,9 +1,9 @@
-import Link from "next/link";
 import * as S from "./BoardList.style";
 import { getDate } from "@/src/commons/libraries/utils";
+import { IBoardListUIProps } from "./BoardList.types";
 
-export default function BoardListUI({ data, onClickMoveToDetail, onClickMoveToWrite }) {
-  console.log(data);
+export default function BoardListUI(props: IBoardListUIProps) {
+  const { data, onClickMoveToDetail, onClickMoveToWrite } = props
   return (
     <S.Wrapper>
       <S.Search>
@@ -31,7 +31,7 @@ export default function BoardListUI({ data, onClickMoveToDetail, onClickMoveToWr
           </tr>
         </thead>
         <tbody>
-          {data?.fetchBoards.map((list, idx) => (
+          {data?.fetchBoards.map((list: any, idx: number) => (
             <tr key={list._id}>
               <td>{data.fetchBoards.length - idx}</td>
               <S.ColumnTitle onClick={() => onClickMoveToDetail(list._id)}>

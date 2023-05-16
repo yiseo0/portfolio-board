@@ -1,15 +1,15 @@
 import { useMutation } from "@apollo/client";
-import CommentWriterUI from "./BoardCommentWriter.presenter";
+import CommentWriterUI from "./CommentWriter.presenter";
 import {
   CREATE_BOARD_COMMENT,
   FETCH_BOARD_COMMENTS,
-} from "./BoardCommentWriter.queries";
+} from "./CommentWriter.queries";
 import { useState } from "react";
 import { useRouter } from "next/router";
 
 export default function BoardCommentWriter() {
   const router = useRouter();
-  
+
   const [createBoardComment] = useMutation(CREATE_BOARD_COMMENT);
   const [comment, setComment] = useState({
     cWriter: "",
@@ -18,15 +18,8 @@ export default function BoardCommentWriter() {
     cRating: 0,
   });
 
-  const onChangeComment = (e) => {
+  const onChangeComment = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    if (name === "cDeletePassword") {
-      setCommentDelete({
-        ...commentDelete,
-        [name]: value,
-      });
-      return;
-    }
 
     setComment({
       ...comment,
