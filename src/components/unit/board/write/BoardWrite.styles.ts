@@ -25,8 +25,12 @@ export const Form = styled.form`
   justify-content: space-between;
 `;
 
+interface IWriteBox {
+  row : number
+}
+
 export const WriteBox = styled.div`
-  width: ${(props) =>
+  width: ${(props : IWriteBox) =>
     props.row ? `calc(100%/${props.row} - ${props.row * 6}px)` : "100%"};
   &:not(:last-child) {
     margin-bottom: 40px;
@@ -86,8 +90,12 @@ export const WriteAddress = styled(Write)`
   margin-bottom: 16px;
 `;
 
+interface IButton{
+  bg: string
+}
+
 export const Button = styled.input`
-  background-color: ${(props) => (props.bg ? props.bg : "black")};
+  background-color: ${(props : IButton) => (props.bg ? props.bg : "black")};
   color: ${(props) => (props.color ? props.color : "black")};
   padding: 14px 16px;
   cursor: pointer;

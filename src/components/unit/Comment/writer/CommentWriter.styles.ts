@@ -35,6 +35,10 @@ export const Input = styled.input`
   line-height: 24px;
 `;
 
+interface IStars {
+  star: number;
+}
+
 export const Stars = styled.span`
   position: relative;
   display: inline-flex;
@@ -43,7 +47,7 @@ export const Stars = styled.span`
   vertical-align: sub;
   background: url("/star.png") repeat-x 0 1px;
 
-  ${(props) =>
+  ${(props: IStars) =>
     props.star &&
     css`
       &::after {
@@ -97,6 +101,10 @@ export const TextareaBottom = styled.div`
   padding-left: 20px;
 `;
 
+interface IButton {
+  type: string;
+}
+
 export const Button = styled.button`
   width: 91px;
   height: 100%;
@@ -107,7 +115,7 @@ export const Button = styled.button`
   line-height: 24px;
   color: #ffffff;
   cursor: pointer;
-  ${(props) =>
+  ${(props: IButton) =>
     props.type === "modify" &&
     css`
       color: #000;

@@ -92,6 +92,11 @@ export const Paging = styled.div`
   align-items: center;
   gap: 20px;
 `;
+
+interface IPagingItem {
+  active : string
+}
+
 export const PagingItem = styled.span`
   font-weight: 400;
   font-size: 16px;
@@ -101,7 +106,7 @@ export const PagingItem = styled.span`
   img {
     vertical-align: bottom;
   }
-  ${(props) =>
+  ${(props : IPagingItem) =>
     props.active == "active" &&
     css`
       color: #ffd600;
