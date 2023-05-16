@@ -11,7 +11,7 @@ export default function BoardWriteUI({
   onSubmitUpdate,
   onClickMoveToList
 } : IBoardWriteUIProps) {
-  console.log(data);
+  
   return (
     <S.Wrapper>
       <S.Title>게시물 {isEdit ? "수정" : "등록"}</S.Title>

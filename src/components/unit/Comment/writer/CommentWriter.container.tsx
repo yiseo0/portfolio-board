@@ -6,17 +6,18 @@ import {
 } from "./CommentWriter.queries";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import { IMutation, IMutationCreateBoardCommentArgs } from "@/src/commons/types/generated/types";
 
-export default function BoardCommentWriter() {
+export default function CommentWriter() {
   const router = useRouter();
-
-  const [createBoardComment] = useMutation(CREATE_BOARD_COMMENT);
   const [comment, setComment] = useState({
     cWriter: "",
     cPassword: "",
     cContents: "",
     cRating: 0,
   });
+
+  const [createBoardComment] = useMutation<Pick<IMutation, "createBoardComment">, IMutationCreateBoardCommentArgs>(CREATE_BOARD_COMMENT);
 
   const onChangeComment = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -29,7 +30,7 @@ export default function BoardCommentWriter() {
 
   const onClickCreateComment = async () => {
     try {
-      const result = await createBoardComment({
+      await createBoardComment({
         variables: {
           createBoardCommentInput: {
             writer: comment.cWriter,
@@ -37,7 +38,7 @@ export default function BoardCommentWriter() {
             contents: comment.cContents,
             rating: comment.cRating,
           },
-          boardId: router.query.id,
+          boardId: String(router.query.id),
         },
         refetchQueries: [
           {

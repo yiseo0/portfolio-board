@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { IButtonProps, IWriteBoxProps } from "./BoardWrite.types";
 
 export const Wrapper = styled.div`
   position: relative;
@@ -25,12 +26,8 @@ export const Form = styled.form`
   justify-content: space-between;
 `;
 
-interface IWriteBox {
-  row : number
-}
-
 export const WriteBox = styled.div`
-  width: ${(props : IWriteBox) =>
+  width: ${(props : IWriteBoxProps) =>
     props.row ? `calc(100%/${props.row} - ${props.row * 6}px)` : "100%"};
   &:not(:last-child) {
     margin-bottom: 40px;
@@ -90,12 +87,8 @@ export const WriteAddress = styled(Write)`
   margin-bottom: 16px;
 `;
 
-interface IButton{
-  bg: string
-}
-
 export const Button = styled.input`
-  background-color: ${(props : IButton) => (props.bg ? props.bg : "black")};
+  background-color: ${(props : IButtonProps) => (props.bg ? props.bg : "black")};
   color: ${(props) => (props.color ? props.color : "black")};
   padding: 14px 16px;
   cursor: pointer;

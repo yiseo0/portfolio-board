@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
+import { IButtonProps, IStarsProps } from "./CommentWriter.types";
 
 export const Wrapper = styled.div`
   width: 1200px;
@@ -35,9 +36,7 @@ export const Input = styled.input`
   line-height: 24px;
 `;
 
-interface IStars {
-  star: number;
-}
+
 
 export const Stars = styled.span`
   position: relative;
@@ -47,7 +46,7 @@ export const Stars = styled.span`
   vertical-align: sub;
   background: url("/star.png") repeat-x 0 1px;
 
-  ${(props: IStars) =>
+  ${(props: IStarsProps) =>
     props.star &&
     css`
       &::after {
@@ -70,7 +69,7 @@ export const Star = styled.i`
   cursor: pointer;
 `;
 
-export const Textarea = styled.textarea`
+export const Textarea = styled.input`
   display: block;
   width: 100%;
   height: 108px;
@@ -101,9 +100,7 @@ export const TextareaBottom = styled.div`
   padding-left: 20px;
 `;
 
-interface IButton {
-  type: string;
-}
+
 
 export const Button = styled.button`
   width: 91px;
@@ -115,7 +112,7 @@ export const Button = styled.button`
   line-height: 24px;
   color: #ffffff;
   cursor: pointer;
-  ${(props: IButton) =>
+  ${(props: IButtonProps) =>
     props.type === "modify" &&
     css`
       color: #000;

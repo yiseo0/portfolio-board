@@ -1,4 +1,6 @@
+import { IQuery } from "@/src/commons/types/generated/types";
+
 export interface ICommentListUIProps {
-  data : any;
-  onClickDelete : (id : string) => void;
+  data?: Pick<IQuery, "fetchBoardComments">;
+  onClickDelete: (id: string) => void;
 }

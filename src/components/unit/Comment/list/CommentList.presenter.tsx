@@ -2,8 +2,7 @@ import { Stars } from "../writer/CommentWriter.styles";
 import { ICommentListUIProps } from "./CommentList.types";
 import * as S from "./CommentList.styles";
 
-export default function CommentListUI(props: ICommentListUIProps) {
-  const { data, onClickDelete } = props;
+export default function CommentListUI({ data, onClickDelete }: ICommentListUIProps) {
   return (
     <>
       {/* 수정 */}
@@ -32,7 +31,7 @@ export default function CommentListUI(props: ICommentListUIProps) {
 
       {data?.fetchBoardComments.map((el: any) => (
         <S.ItemWrapper key={el._id}>
-          <S.Avatar src="/images/commons/avatar.svg" />
+          <S.Avatar src="/images/commons/avatar.svg" width={48} height={48} />
           <S.MainWrapper>
             <>
               <span className="writer">{el.writer}</span>

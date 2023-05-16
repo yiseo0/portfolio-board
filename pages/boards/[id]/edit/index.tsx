@@ -1,3 +1,4 @@
+import { IQuery, IQueryFetchBoardArgs } from "@/src/commons/types/generated/types";
 import BoardWrite from "@/src/components/unit/board/write/BoardWrite.container";
 import { gql, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
@@ -16,12 +17,12 @@ export const FETCH_BOARD = gql`
 export default function BoardEditPage() {
   const router = useRouter();
 
-  const { data } = useQuery(FETCH_BOARD, {
+  const { data } = useQuery<Pick<IQuery, "fetchBoard">, IQueryFetchBoardArgs>(FETCH_BOARD, {
     variables: {
-      boardId: router.query.id
+      boardId: String(router.query.id)
     },
   });
-  
+
 
   return <BoardWrite isEdit={true} data={data} />;
 }

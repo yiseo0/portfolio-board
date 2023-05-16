@@ -1,7 +1,4 @@
-export interface IBoardWriteProps {
-  isEdit: boolean;
-  data: any;
-}
+import { IQuery } from "@/src/commons/types/generated/types";
 
 export interface IUpdateBoardInput {
   title?: string;
@@ -10,11 +7,19 @@ export interface IUpdateBoardInput {
 
 export interface IBoardWriteUIProps {
   isEdit: boolean;
-  data: any;
+  data?: Pick<IQuery, "fetchBoard">;
   register: any;
-  handleSubmit: any
-  errors : any;
-  onSubmit : () => void;
-  onSubmitUpdate : () => void;
-  onClickMoveToList : () => void;
+  handleSubmit: any;
+  errors: any;
+  onSubmit: (data: any) => void;
+  onSubmitUpdate: (data: any) => void;
+  onClickMoveToList: () => void;
+}
+
+export interface IWriteBoxProps {
+  row? : string
+}
+
+export interface IButtonProps{
+  bg?: string
 }

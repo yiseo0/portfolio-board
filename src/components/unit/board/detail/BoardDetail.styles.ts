@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
+import { ILikeButtonProps, IMapTooltipProps } from "./BoardDetail.types";
 
 export const Wrapper = styled.div`
   position: relative;
@@ -120,24 +121,18 @@ export const LikeButtonWrap = styled.span`
   line-height: 27px;
 `;
 
-interface ILikeButton {
-  like: string
-}
 export const LikeButton = styled.span`
   display: flex;
   align-items: center;
   flex-direction: column;
   cursor: pointer;
-  ${(props : ILikeButton) =>
+  ${(props: ILikeButtonProps) =>
     props.like === "like" &&
     css`
       color: #ffd600;
     `}
 `;
 
-interface IMapTooltip {
-  state: string
-}
 export const MapTooltip = styled.div`
   position: relative;
   padding: 8px 16px;
@@ -150,7 +145,7 @@ export const MapTooltip = styled.div`
   position: absolute;
   top: 20px;
   right: 118px;
-  display: ${(props : IMapTooltip) => (props.state ? props.state : "none")};
+  display: ${(props: IMapTooltipProps) => (props.state ? props.state : "none")};
   &::after {
     content: "";
     display: inline-block;

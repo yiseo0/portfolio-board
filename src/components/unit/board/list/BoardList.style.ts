@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
+import { IPagingItemProps } from "./BoardList.types";
 
 export const Wrapper = styled.div`
   position: relative;
@@ -93,10 +94,6 @@ export const Paging = styled.div`
   gap: 20px;
 `;
 
-interface IPagingItem {
-  active : string
-}
-
 export const PagingItem = styled.span`
   font-weight: 400;
   font-size: 16px;
@@ -106,7 +103,7 @@ export const PagingItem = styled.span`
   img {
     vertical-align: bottom;
   }
-  ${(props : IPagingItem) =>
+  ${(props: IPagingItemProps) =>
     props.active == "active" &&
     css`
       color: #ffd600;

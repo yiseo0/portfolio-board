@@ -6,22 +6,29 @@ import {
   DELETE_BOARD,
   FETCH_BOARD,
 } from "./BoardDetail.queries";
+import { IMutation, IMutationDeleteBoardArgs, IQuery, IQueryFetchBoardArgs } from "@/src/commons/types/generated/types";
 
 export default function BoardDetail() {
   const router = useRouter();
-  const { data } = useQuery(FETCH_BOARD, {
+
+  // if(typeof router.query.id !== "string") {
+  //   router.push("/")
+  //   return <></>
+  // }
+
+  const { data } = useQuery<Pick<IQuery, "fetchBoard">, IQueryFetchBoardArgs>(FETCH_BOARD, {
     variables: {
-      boardId: router.query.id,
+      boardId: String(router.query.id),
     },
   });
 
-  const [delete_board] = useMutation(DELETE_BOARD);
+  const [deleteBoard] = useMutation<Pick<IMutation, "deleteBoard">, IMutationDeleteBoardArgs>(DELETE_BOARD);
   const [toggle, setToggle] = useState(false);
 
   const onDelete = () => {
-    delete_board({
+    deleteBoard({
       variables: {
-        boardId: router.query.id,
+        boardId: String(router.query.id),
       },
     });
     alert("게시물이 삭제되었습니다.");
