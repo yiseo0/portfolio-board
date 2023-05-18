@@ -123,15 +123,17 @@ export const LikeButtonWrap = styled.span`
 
 export const LikeButton = styled.span`
   display: flex;
+  justify-content: space-between;
   align-items: center;
   flex-direction: column;
+  gap: 4px;
   cursor: pointer;
-  ${(props: ILikeButtonProps) =>
-    props.like === "like" &&
-    css`
-      color: #ffd600;
-    `}
+  color: ${(props: ILikeButtonProps) =>
+    props.dislike ? "#828282" : "#ffd600"};
 `;
+
+export const LikeIcon = styled.img``;
+export const DislikeIcon = styled.img``;
 
 export const MapTooltip = styled.div`
   position: relative;
@@ -145,7 +147,7 @@ export const MapTooltip = styled.div`
   position: absolute;
   top: 20px;
   right: 118px;
-  display: ${(props: IMapTooltipProps) => (props.state ? props.state : "none")};
+  display: ${(props: IMapTooltipProps) => (props.state ? "block" : "none")};
   &::after {
     content: "";
     display: inline-block;

@@ -4,9 +4,11 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import {
   DELETE_BOARD,
+  DISLIKE_BOARD,
   FETCH_BOARD,
+  LIKE_BOARD,
 } from "./BoardDetail.queries";
-import { IMutation, IMutationDeleteBoardArgs, IQuery, IQueryFetchBoardArgs } from "@/src/commons/types/generated/types";
+import { IMutation, IMutationDeleteBoardArgs, IMutationDislikeBoardArgs, IMutationLikeBoardArgs, IQuery, IQueryFetchBoardArgs } from "@/src/commons/types/generated/types";
 
 export default function BoardDetail() {
   const router = useRouter();
@@ -23,6 +25,8 @@ export default function BoardDetail() {
   });
 
   const [deleteBoard] = useMutation<Pick<IMutation, "deleteBoard">, IMutationDeleteBoardArgs>(DELETE_BOARD);
+  const [like_board] = useMutation<Pick<IMutation, "likeBoard">, IMutationLikeBoardArgs>(LIKE_BOARD)
+  const [dislike_board] = useMutation<Pick<IMutation, "dislikeBoard">, IMutationDislikeBoardArgs>(DISLIKE_BOARD)
   const [toggle, setToggle] = useState(false);
 
   const onDelete = () => {
@@ -43,6 +47,41 @@ export default function BoardDetail() {
     router.push(`/boards`);
   };
 
+  // 좋아요
+  const onClickLike = () => {
+    try {
+      like_board({
+        variables: {
+          boardId: String(router.query.id)
+        }, refetchQueries: [{
+          query: FETCH_BOARD,
+          variables: {
+            boardId: String(router.query.id)
+          }
+        }]
+      })
+    } catch (error) {
+      alert(error)
+    }
+  }
+
+  const onClickDislike = () => {
+    try {
+      dislike_board({
+        variables: {
+          boardId: String(router.query.id)
+        }, refetchQueries: [{
+          query: FETCH_BOARD,
+          variables: {
+            boardId: String(router.query.id)
+          }
+        }]
+      })
+    } catch (error) {
+      alert(error)
+    }
+  }
+
   return (
     <BoardDetailUI
       data={data}
@@ -51,6 +90,8 @@ export default function BoardDetail() {
       onDelete={onDelete}
       onClickMoveToEdit={onClickMoveToEdit}
       onClickMoveToList={onClickMoveToList}
+      onClickLike={onClickLike}
+      onClickDislike={onClickDislike}
     />
   );
 }

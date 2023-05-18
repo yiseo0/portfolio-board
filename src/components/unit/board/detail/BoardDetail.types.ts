@@ -7,12 +7,14 @@ export interface IBoardDetailUIProps {
   onDelete: () => void;
   onClickMoveToEdit: () => void;
   onClickMoveToList: () => void;
+  onClickLike: () => void;
+  onClickDislike: () => void;
 }
 
 export interface ILikeButtonProps {
-  like: string;
+  dislike?: boolean;
 }
 
 export interface IMapTooltipProps {
-  state: string;
+  state?: boolean;
 }

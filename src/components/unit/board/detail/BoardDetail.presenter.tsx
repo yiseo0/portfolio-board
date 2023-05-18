@@ -1,7 +1,7 @@
 import * as S from "./BoardDetail.styles";
 import { IBoardDetailUIProps } from "./BoardDetail.types";
 
-export default function BoardDetailUI(props : IBoardDetailUIProps) {
+export default function BoardDetailUI(props: IBoardDetailUIProps) {
   const {
     data,
     toggle,
@@ -9,6 +9,8 @@ export default function BoardDetailUI(props : IBoardDetailUIProps) {
     onDelete,
     onClickMoveToEdit,
     onClickMoveToList,
+    onClickLike,
+    onClickDislike,
   } = props
   return (
     <>
@@ -27,7 +29,7 @@ export default function BoardDetailUI(props : IBoardDetailUIProps) {
               src="/images/board/detail/icon_map.svg"
               onClick={(toggle) => setToggle(!toggle)}
             />
-            <S.MapTooltip state={toggle && "block"}>
+            <S.MapTooltip state={toggle}>
               서울특별시 영등포구 양산로 200
               <br />
               (영등포동5가, 영등포시장역) 영등포 타임스퀘어 2층
@@ -39,14 +41,14 @@ export default function BoardDetailUI(props : IBoardDetailUIProps) {
           <h3 className="title">{data?.fetchBoard.title}</h3>
           <div className="content">{data?.fetchBoard.contents}</div>
 
-          <S.LikeButtonWrap>
-            <S.LikeButton like="like">
-              <S.Icon src="/images/board/detail/icon_Like.svg" />
-              1920
+          <S.LikeButtonWrap >
+            <S.LikeButton onClick={onClickLike}>
+              <S.LikeIcon src="/images/board/detail/icon_Like.svg" />
+              {data?.fetchBoard.likeCount}
             </S.LikeButton>
-            <S.LikeButton>
-              <S.Icon src="/images/board/detail/icon_unLike.svg" />
-              1920
+            <S.LikeButton dislike={true} id="dislike" onClick={onClickDislike}>
+              <S.DislikeIcon src="/images/board/detail/icon_disLike.svg" />
+              {data?.fetchBoard.dislikeCount}
             </S.LikeButton>
           </S.LikeButtonWrap>
         </S.BoardDetailBody>
