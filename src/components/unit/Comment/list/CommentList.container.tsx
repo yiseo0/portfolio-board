@@ -38,7 +38,7 @@ export default function CommentList() {
       });
       alert("댓글이 삭제되었습니다.");
     } catch (error) {
-      alert(error);
+      if (error instanceof Error) alert(error.message)
     }
   };
 

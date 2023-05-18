@@ -6,6 +6,7 @@ import {
 } from "./CommentWriter.queries";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import type { ChangeEvent } from "react";
 import type { IMutation, IMutationCreateBoardCommentArgs } from "@/src/commons/types/generated/types";
 
 export default function CommentWriter() {
@@ -19,7 +20,7 @@ export default function CommentWriter() {
 
   const [createBoardComment] = useMutation<Pick<IMutation, "createBoardComment">, IMutationCreateBoardCommentArgs>(CREATE_BOARD_COMMENT);
 
-  const onChangeComment = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeComment = (e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
     const { name, value } = e.target;
 
     setComment({
@@ -57,7 +58,7 @@ export default function CommentWriter() {
         cRating: 0,
       });
     } catch (error) {
-      alert(error);
+      if (error instanceof Error) alert(error.message)
     }
   };
 

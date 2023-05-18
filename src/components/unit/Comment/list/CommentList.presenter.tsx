@@ -1,4 +1,5 @@
-import { Stars } from "../writer/CommentWriter.styles";
+import { getDate } from "@/src/commons/libraries/utils";
+import { Rate } from "antd";
 import type { ICommentListUIProps } from "./CommentList.types";
 import * as S from "./CommentList.styles";
 
@@ -35,10 +36,10 @@ export default function CommentListUI({ data, onClickDelete }: ICommentListUIPro
           <S.MainWrapper>
             <>
               <span className="writer">{el.writer}</span>
-              <Stars star={el.rating} />
+              <Rate disabled defaultValue={el.rating} />
             </>
             <p className="comment">{el.contents}</p>
-            <p className="update-date">{el.updatedAt}</p>
+            <p className="update-date">{getDate(el.updatedAt)}</p>
           </S.MainWrapper>
           <S.OptionWrapper>
             <S.UpdateIcon src="/images/boardComment/list/icon_option_update.svg" />

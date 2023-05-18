@@ -39,7 +39,7 @@ export default function BoardDetail() {
       alert("게시물이 삭제되었습니다.");
       void router.push("/boards");
     } catch (error) {
-      alert(error)
+      if (error instanceof Error) alert(error.message)
     }
   };
 
@@ -65,7 +65,7 @@ export default function BoardDetail() {
         }]
       })
     } catch (error) {
-      alert(error)
+      if (error instanceof Error) alert(error.message)
     }
   }
 
@@ -82,7 +82,7 @@ export default function BoardDetail() {
         }]
       })
     } catch (error) {
-      alert(error)
+      if (error instanceof Error) alert(error.message)
     }
   }
 

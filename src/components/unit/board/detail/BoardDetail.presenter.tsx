@@ -1,3 +1,4 @@
+import { getDate } from "@/src/commons/libraries/utils";
 import * as S from "./BoardDetail.styles";
 import type { IBoardDetailUIProps } from "./BoardDetail.types";
 
@@ -20,7 +21,7 @@ export default function BoardDetailUI(props: IBoardDetailUIProps) {
 
           <S.HeaderInfo>
             <S.InfoWriter>{data?.fetchBoard.writer}</S.InfoWriter>
-            <S.InfoUpdatedAt>{data?.fetchBoard.updatedAt}</S.InfoUpdatedAt>
+            <S.InfoUpdatedAt>{getDate(data?.fetchBoard.updatedAt)}</S.InfoUpdatedAt>
           </S.HeaderInfo>
 
           <S.HeaderOption>

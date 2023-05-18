@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import type { IButtonProps, IStarsProps } from "./CommentWriter.types";
+import type { IButtonProps } from "./CommentWriter.types";
 
 export const Wrapper = styled.div`
   width: 1200px;
@@ -23,6 +23,7 @@ export const HeaderTitle = styled.span`
   color: #000;
 `;
 
+export const InputWrapper = styled.div``;
 export const Input = styled.input`
   width: 180px;
   height: 52px;
@@ -36,38 +37,7 @@ export const Input = styled.input`
   line-height: 24px;
 `;
 
-export const Stars = styled.span`
-  position: relative;
-  display: inline-flex;
-  width: 120px;
-  height: 24px;
-  vertical-align: sub;
-  background: url("/star.png") repeat-x 0 1px;
-
-  ${(props: IStarsProps) =>
-    props.star &&
-    css`
-      &::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: ${props.star * 20}%;
-        height: 100%;
-        background: #fff url("/star.png") repeat-x 0 100%;
-      }
-    `}
-`;
-
-export const Star = styled.i`
-  position: relative;
-  z-index: 1;
-  width: 24px;
-  height: 24px;
-  cursor: pointer;
-`;
-
-export const Textarea = styled.input`
+export const Textarea = styled.textarea`
   display: block;
   width: 100%;
   height: 108px;

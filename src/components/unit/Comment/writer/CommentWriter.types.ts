@@ -1,14 +1,18 @@
+import type { ChangeEvent } from "react";
+
 export interface ICommentState {
-  cWriter: string ;
-  cPassword: string ;
-  cContents: string ;
-  cRating: number ;
+  cWriter: string;
+  cPassword: string;
+  cContents: string;
+  cRating: number;
 }
 
 export interface ICommentWriterUIProps {
   comment: ICommentState;
   setComment: any;
-  onChangeComment: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeComment: (
+    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
+  ) => void;
   onClickCreateComment: () => void;
 }
 
