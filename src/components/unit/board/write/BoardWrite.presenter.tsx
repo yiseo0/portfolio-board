@@ -1,5 +1,5 @@
 import * as S from "./BoardWrite.styles";
-import { IBoardWriteUIProps } from "./BoardWrite.types";
+import type { IBoardWriteUIProps } from "./BoardWrite.types";
 
 export default function BoardWriteUI({
   isEdit,
@@ -10,8 +10,8 @@ export default function BoardWriteUI({
   onSubmit,
   onSubmitUpdate,
   onClickMoveToList
-} : IBoardWriteUIProps) {
-  
+}: IBoardWriteUIProps) {
+
   return (
     <S.Wrapper>
       <S.Title>게시물 {isEdit ? "수정" : "등록"}</S.Title>
@@ -30,7 +30,7 @@ export default function BoardWriteUI({
               isEdit || { required: "이름을 입력해주세요." }
             )}
             defaultValue={data?.fetchBoard.writer}
-            disabled={isEdit ? true : false}
+            disabled={isEdit}
           />
           <S.Error>{errors.writer?.message}</S.Error>
         </S.WriteBox>

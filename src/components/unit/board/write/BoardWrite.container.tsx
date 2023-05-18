@@ -3,8 +3,8 @@ import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.queries";
-import { IBoardWriteUIProps, IUpdateBoardInput } from "./BoardWrite.types";
-import { IMutation, IMutationCreateBoardArgs, IMutationUpdateBoardArgs } from "@/src/commons/types/generated/types";
+import type { IBoardWriteUIProps, IUpdateBoardInput } from "./BoardWrite.types";
+import type { IMutation, IMutationCreateBoardArgs, IMutationUpdateBoardArgs } from "@/src/commons/types/generated/types";
 
 export default function BoardWrite({ isEdit, data }: Pick<IBoardWriteUIProps, "isEdit" | "data">) {
   const router = useRouter();
@@ -19,7 +19,7 @@ export default function BoardWrite({ isEdit, data }: Pick<IBoardWriteUIProps, "i
   const onSubmit = async (data: any) => {
     const { writer, password, title, contents } = data;
     try {
-      await createBoard({
+      const result = await createBoard({
         variables: {
           createBoardInput: {
             writer,
@@ -31,7 +31,8 @@ export default function BoardWrite({ isEdit, data }: Pick<IBoardWriteUIProps, "i
       });
 
       alert("게시물 등록이 완료되었습니다.");
-      router.push(`/boards/${router.query.id}`);
+      console.log(result)
+      void router.push(`/boards/${String(result.data?.createBoard._id)}`);
     } catch (error: any) {
       alert(error.message);
     }
@@ -53,14 +54,14 @@ export default function BoardWrite({ isEdit, data }: Pick<IBoardWriteUIProps, "i
         },
       });
       alert("게시물 수정이 완료되었습니다.");
-      router.push(`/boards/${router.query.id}`);
+      void router.push(`/boards/${String(router.query.id)}`);
     } catch (error: any) {
       alert(error.message);
     }
   };
 
   const onClickMoveToList = () => {
-    router.push('/boards')
+    void router.push('/boards')
   }
 
   return (

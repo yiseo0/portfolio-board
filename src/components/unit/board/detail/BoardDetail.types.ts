@@ -1,9 +1,9 @@
-import { IQuery } from "@/src/commons/types/generated/types";
+import type { IQuery } from "@/src/commons/types/generated/types";
 
 export interface IBoardDetailUIProps {
   data?: Pick<IQuery, "fetchBoard">;
   toggle: boolean;
-  setToggle: (toggle: boolean) => void;
+  setToggle: (toggle: boolean) => any;
   onDelete: () => void;
   onClickMoveToEdit: () => void;
   onClickMoveToList: () => void;

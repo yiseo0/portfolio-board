@@ -8,7 +8,7 @@ import {
   FETCH_BOARD,
   LIKE_BOARD,
 } from "./BoardDetail.queries";
-import { IMutation, IMutationDeleteBoardArgs, IMutationDislikeBoardArgs, IMutationLikeBoardArgs, IQuery, IQueryFetchBoardArgs } from "@/src/commons/types/generated/types";
+import type { IMutation, IMutationDeleteBoardArgs, IMutationDislikeBoardArgs, IMutationLikeBoardArgs, IQuery, IQueryFetchBoardArgs } from "@/src/commons/types/generated/types";
 
 export default function BoardDetail() {
   const router = useRouter();
@@ -25,32 +25,36 @@ export default function BoardDetail() {
   });
 
   const [deleteBoard] = useMutation<Pick<IMutation, "deleteBoard">, IMutationDeleteBoardArgs>(DELETE_BOARD);
-  const [like_board] = useMutation<Pick<IMutation, "likeBoard">, IMutationLikeBoardArgs>(LIKE_BOARD)
-  const [dislike_board] = useMutation<Pick<IMutation, "dislikeBoard">, IMutationDislikeBoardArgs>(DISLIKE_BOARD)
+  const [likeBoard] = useMutation<Pick<IMutation, "likeBoard">, IMutationLikeBoardArgs>(LIKE_BOARD)
+  const [dislikeBoard] = useMutation<Pick<IMutation, "dislikeBoard">, IMutationDislikeBoardArgs>(DISLIKE_BOARD)
   const [toggle, setToggle] = useState(false);
 
-  const onDelete = () => {
-    deleteBoard({
-      variables: {
-        boardId: String(router.query.id),
-      },
-    });
-    alert("게시물이 삭제되었습니다.");
-    router.push("/boards");
+  const onDelete = async () => {
+    try {
+      await deleteBoard({
+        variables: {
+          boardId: String(router.query.id),
+        },
+      });
+      alert("게시물이 삭제되었습니다.");
+      void router.push("/boards");
+    } catch (error) {
+      alert(error)
+    }
   };
 
   const onClickMoveToEdit = () => {
-    router.push(`/boards/${router.query.id}/edit`);
+    void router.push(`/boards/${String(router.query.id)}/edit`);
   };
 
   const onClickMoveToList = () => {
-    router.push(`/boards`);
+    void router.push(`/boards`);
   };
 
   // 좋아요
-  const onClickLike = () => {
+  const onClickLike = async () => {
     try {
-      like_board({
+      await likeBoard({
         variables: {
           boardId: String(router.query.id)
         }, refetchQueries: [{
@@ -65,9 +69,9 @@ export default function BoardDetail() {
     }
   }
 
-  const onClickDislike = () => {
+  const onClickDislike = async () => {
     try {
-      dislike_board({
+      await dislikeBoard({
         variables: {
           boardId: String(router.query.id)
         }, refetchQueries: [{

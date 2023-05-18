@@ -1,5 +1,5 @@
 import * as S from "./BoardDetail.styles";
-import { IBoardDetailUIProps } from "./BoardDetail.types";
+import type { IBoardDetailUIProps } from "./BoardDetail.types";
 
 export default function BoardDetailUI(props: IBoardDetailUIProps) {
   const {
@@ -27,7 +27,7 @@ export default function BoardDetailUI(props: IBoardDetailUIProps) {
             <S.Icon src="/images/board/detail/icon_link.svg" />
             <S.IconMap
               src="/images/board/detail/icon_map.svg"
-              onClick={(toggle) => setToggle(!toggle)}
+              onClick={() => setToggle(!toggle)}
             />
             <S.MapTooltip state={toggle}>
               서울특별시 영등포구 양산로 200

@@ -1,5 +1,5 @@
 import * as S from "./CommentWriter.styles";
-import { ICommentWriterUIProps } from "./CommentWriter.types";
+import type { ICommentWriterUIProps } from "./CommentWriter.types";
 
 export default function CommentWriterUI({ comment, setComment, onChangeComment, onClickCreateComment }: ICommentWriterUIProps) {
 

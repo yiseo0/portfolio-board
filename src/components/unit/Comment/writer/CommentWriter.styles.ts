@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { IButtonProps, IStarsProps } from "./CommentWriter.types";
+import type { IButtonProps, IStarsProps } from "./CommentWriter.types";
 
 export const Wrapper = styled.div`
   width: 1200px;
@@ -35,8 +35,6 @@ export const Input = styled.input`
   font-size: 16px;
   line-height: 24px;
 `;
-
-
 
 export const Stars = styled.span`
   position: relative;
@@ -99,8 +97,6 @@ export const TextareaBottom = styled.div`
   color: #bdbdbd;
   padding-left: 20px;
 `;
-
-
 
 export const Button = styled.button`
   width: 91px;

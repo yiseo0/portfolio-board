@@ -1,6 +1,5 @@
-import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { ILikeButtonProps, IMapTooltipProps } from "./BoardDetail.types";
+import type { ILikeButtonProps, IMapTooltipProps } from "./BoardDetail.types";
 
 export const Wrapper = styled.div`
   position: relative;

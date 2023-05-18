@@ -1,6 +1,6 @@
 import * as S from "./BoardList.style";
 import { getDate } from "@/src/commons/libraries/utils";
-import { IBoardListUIProps } from "./BoardList.types";
+import type { IBoardListUIProps } from "./BoardList.types";
 
 export default function BoardListUI(props: IBoardListUIProps) {
   const { data, onClickMoveToDetail, onClickMoveToWrite } = props
@@ -34,7 +34,7 @@ export default function BoardListUI(props: IBoardListUIProps) {
           {data?.fetchBoards.map((list: any, idx: number) => (
             <tr key={list._id}>
               <td>{data.fetchBoards.length - idx}</td>
-              <S.ColumnTitle onClick={() => onClickMoveToDetail(list._id)}>
+              <S.ColumnTitle id={list._id} onClick={onClickMoveToDetail}>
                 {list.title}
               </S.ColumnTitle>
               <td>{list.writer}</td>
@@ -59,6 +59,6 @@ export default function BoardListUI(props: IBoardListUIProps) {
           게시물 등록하기
         </S.ButtonWrite>
       </S.TableBottom>
-    </S.Wrapper>
+    </S.Wrapper >
   );
 }

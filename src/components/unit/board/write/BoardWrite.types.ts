@@ -1,4 +1,4 @@
-import { IQuery } from "@/src/commons/types/generated/types";
+import type { IQuery } from "@/src/commons/types/generated/types";
 
 export interface IUpdateBoardInput {
   title?: string;
@@ -17,9 +17,9 @@ export interface IBoardWriteUIProps {
 }
 
 export interface IWriteBoxProps {
-  row? : string
+  row?: string;
 }
 
-export interface IButtonProps{
-  bg?: string
+export interface IButtonProps {
+  bg?: string;
 }

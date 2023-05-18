@@ -6,7 +6,7 @@ import {
 } from "./CommentWriter.queries";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { IMutation, IMutationCreateBoardCommentArgs } from "@/src/commons/types/generated/types";
+import type { IMutation, IMutationCreateBoardCommentArgs } from "@/src/commons/types/generated/types";
 
 export default function CommentWriter() {
   const router = useRouter();

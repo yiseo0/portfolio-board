@@ -1,4 +1,5 @@
-import { IMutation, IMutationDeleteBoardCommentArgs, IQuery, IQueryFetchBoardCommentsArgs } from "@/src/commons/types/generated/types";
+import type { MouseEvent } from "react";
+import type { IMutation, IMutationDeleteBoardCommentArgs, IQuery, IQueryFetchBoardCommentsArgs } from "@/src/commons/types/generated/types";
 import CommentListUI from "./CommentList.presenter";
 import {
   DELETE_BOARD_COMMENT,
@@ -18,13 +19,13 @@ export default function CommentList() {
   const [deleteBoardComment] = useMutation<Pick<IMutation, "deleteBoardComment">, IMutationDeleteBoardCommentArgs>(DELETE_BOARD_COMMENT);
 
 
-  const onClickDelete = async (id: string) => {
+  const onClickDelete = async (e: MouseEvent<HTMLImageElement>) => {
     try {
       const password = prompt("비밀번호를 입력해주세요.");
       await deleteBoardComment({
         variables: {
-          password: password,
-          boardCommentId: id,
+          password,
+          boardCommentId: e.currentTarget.id,
         },
         refetchQueries: [
           {

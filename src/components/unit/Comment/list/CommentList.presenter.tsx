@@ -1,5 +1,5 @@
 import { Stars } from "../writer/CommentWriter.styles";
-import { ICommentListUIProps } from "./CommentList.types";
+import type { ICommentListUIProps } from "./CommentList.types";
 import * as S from "./CommentList.styles";
 
 export default function CommentListUI({ data, onClickDelete }: ICommentListUIProps) {
@@ -44,7 +44,8 @@ export default function CommentListUI({ data, onClickDelete }: ICommentListUIPro
             <S.UpdateIcon src="/images/boardComment/list/icon_option_update.svg" />
             <S.DeleteIcon
               src="/images/boardComment/list/icon_option_delete.svg"
-              onClick={() => onClickDelete(el._id)}
+              id="el.id"
+              onClick={onClickDelete}
             />
           </S.OptionWrapper>
         </S.ItemWrapper>

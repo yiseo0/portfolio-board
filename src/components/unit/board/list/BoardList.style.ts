@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { IPagingItemProps } from "./BoardList.types";
+import type { IPagingItemProps } from "./BoardList.types";
 
 export const Wrapper = styled.div`
   position: relative;
@@ -104,7 +104,7 @@ export const PagingItem = styled.span`
     vertical-align: bottom;
   }
   ${(props: IPagingItemProps) =>
-    props.active == "active" &&
+    props.active === "active" &&
     css`
       color: #ffd600;
       text-decoration: underline;

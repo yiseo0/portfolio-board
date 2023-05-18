@@ -1,6 +1,7 @@
-import { IQuery } from "@/src/commons/types/generated/types";
+import type { MouseEvent } from "react";
+import type { IQuery } from "@/src/commons/types/generated/types";
 
 export interface ICommentListUIProps {
   data?: Pick<IQuery, "fetchBoardComments">;
-  onClickDelete: (id: string) => void;
+  onClickDelete: (e: MouseEvent<HTMLImageElement>) => void;
 }
