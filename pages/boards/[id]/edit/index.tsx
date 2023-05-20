@@ -10,6 +10,11 @@ export const FETCH_BOARD = gql`
       writer
       contents
       title
+      boardAddress {
+        zipcode
+        address
+        addressDetail
+      }
     }
   }
 `;

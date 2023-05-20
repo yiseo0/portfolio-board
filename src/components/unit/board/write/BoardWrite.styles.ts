@@ -1,5 +1,7 @@
 import styled from "@emotion/styled";
 import type { IButtonProps, IWriteBoxProps } from "./BoardWrite.types";
+import { Modal } from "antd";
+import DaumPostcodeEmbed from "react-daum-postcode";
 
 export const Wrapper = styled.div`
   position: relative;
@@ -151,13 +153,11 @@ export const Radio = styled.input`
     }
   }
 `;
-
 export const RadioLabel = styled.label`
   & + label {
     padding-left: 24px;
   }
 `;
-
 export const BoardBtnBox = styled.div`
   display: flex;
   gap: 24px;
@@ -168,3 +168,6 @@ export const BoardBtn = styled(Button)`
   margin: 0 auto;
   border: 0;
 `;
+
+export const AddressModal = styled(Modal)``;
+export const AddressSearchInput = styled(DaumPostcodeEmbed)``;

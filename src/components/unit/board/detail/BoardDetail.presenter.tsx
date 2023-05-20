@@ -31,9 +31,9 @@ export default function BoardDetailUI(props: IBoardDetailUIProps) {
               onClick={() => setToggle(!toggle)}
             />
             <S.MapTooltip state={toggle}>
-              서울특별시 영등포구 양산로 200
-              <br />
-              (영등포동5가, 영등포시장역) 영등포 타임스퀘어 2층
+              {data?.fetchBoard.boardAddress?.address}
+              &nbsp;
+              {data?.fetchBoard.boardAddress?.addressDetail}
             </S.MapTooltip>
           </S.HeaderOption>
         </S.Header>

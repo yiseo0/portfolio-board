@@ -1,4 +1,3 @@
-import { Rate } from "antd";
 import * as S from "./CommentWriter.styles";
 import type { ICommentWriterUIProps } from "./CommentWriter.types";
 
@@ -28,7 +27,7 @@ export default function CommentWriterUI({ comment, setComment, onChangeComment, 
             onChange={onChangeComment}
           />
 
-          <Rate value={comment.cRating} onChange={(value) => setComment({ ...comment, cRating: value })} />
+          <S.Star value={comment.cRating} onChange={(value) => setComment({ ...comment, cRating: value })} />
         </S.InputWrapper>
 
         <S.Textarea

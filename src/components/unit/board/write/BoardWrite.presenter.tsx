@@ -7,9 +7,12 @@ export default function BoardWriteUI({
   register,
   handleSubmit,
   errors,
+  isOpen,
   onSubmit,
   onSubmitUpdate,
-  onClickMoveToList
+  onClickMoveToList,
+  onClickAddressSearch,
+  onCompleteAddressSearch
 }: IBoardWriteUIProps) {
 
   return (
@@ -29,7 +32,7 @@ export default function BoardWriteUI({
               "writer",
               isEdit || { required: "이름을 입력해주세요." }
             )}
-            defaultValue={data?.fetchBoard.writer}
+            defaultValue={data?.fetchBoard.writer ?? ""}
             disabled={isEdit}
           />
           <S.Error>{errors.writer?.message}</S.Error>
@@ -50,7 +53,7 @@ export default function BoardWriteUI({
           <S.Label htmlFor="">제목</S.Label>
           <S.Write
             type="text"
-            defaultValue={data?.fetchBoard.title}
+            defaultValue={data?.fetchBoard.title ?? ""}
             placeholder="제목을 작성해주세요."
             {...register(
               "title",
@@ -64,7 +67,7 @@ export default function BoardWriteUI({
           <S.WriteContent
             type="text"
             placeholder="내용을 작성해주세요."
-            defaultValue={data?.fetchBoard.contents}
+            defaultValue={data?.fetchBoard.contents ?? ""}
             {...register(
               "contents",
               isEdit || { required: "내용을 작성해주세요." }
@@ -76,12 +79,14 @@ export default function BoardWriteUI({
           <S.Label htmlFor="">주소</S.Label>
           <S.WriteAddress
             type="text"
+            readOnly
             placeholder="07250"
-            {...register("zipCode")}
+            defaultValue={data?.fetchBoard.boardAddress?.zipcode ?? ""}
+            {...register("zipcode")}
           />
-          <S.Button color="white" type="button" value="우편번호 검색" />
-          <S.Write type="text" {...register("address")} />
-          <S.Write type="text" {...register("addressDetail")} />
+          <S.Button color="white" type="button" value="우편번호 검색" onClick={onClickAddressSearch} />
+          <S.Write type="text" readOnly defaultValue={data?.fetchBoard.boardAddress?.address ?? ""} {...register("address")} />
+          <S.Write type="text" defaultValue={data?.fetchBoard.boardAddress?.addressDetail ?? ""} {...register("addressDetail")} />
         </S.WriteBox>
         <S.WriteBox>
           <S.Label htmlFor="">유튜브</S.Label>
@@ -133,6 +138,14 @@ export default function BoardWriteUI({
           />
         </S.BoardBtnBox>
       </S.Form>
+
+      {
+        isOpen &&
+        <S.AddressModal open={true}>
+          <S.AddressSearchInput onComplete={onCompleteAddressSearch} />
+        </S.AddressModal>
+      }
+
     </S.Wrapper>
   );
 }

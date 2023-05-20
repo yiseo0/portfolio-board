@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { Rate } from "antd";
 
 export const ItemWrapper = styled.div`
   display: flex;
@@ -17,7 +18,6 @@ export const MainWrapper = styled.div`
     font-size: 16px;
     line-height: 24px;
     color: #000000;
-    margin-right: 18px;
   }
 
   .comment {
@@ -33,6 +33,9 @@ export const MainWrapper = styled.div`
     line-height: 18px;
     color: #bdbdbd;
   }
+`;
+export const Star = styled(Rate)`
+  padding-left: 20px;
 `;
 export const OptionWrapper = styled.div`
   i ~ i {

@@ -1,7 +1,7 @@
 import { getDate } from "@/src/commons/libraries/utils";
 import type { ICommentListUIProps } from "./CommentList.types";
 import * as S from "./CommentList.styles";
-import { Modal, Rate } from "antd";
+import { Modal } from "antd";
 
 export default function CommentListUI({ data, isModalOpen, onClickModalShow, onClickModalCancel, onChangePassword, onClickDelete }: ICommentListUIProps) {
   return (
@@ -36,7 +36,7 @@ export default function CommentListUI({ data, isModalOpen, onClickModalShow, onC
           <S.MainWrapper>
             <>
               <span className="writer">{el.writer}</span>
-              <Rate disabled defaultValue={el.rating} />
+              <S.Star disabled defaultValue={el.rating} />
             </>
             <p className="comment">{el.contents}</p>
             <p className="update-date">{getDate(el.updatedAt)}</p>

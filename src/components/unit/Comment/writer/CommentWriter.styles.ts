@@ -1,6 +1,7 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import type { IButtonProps } from "./CommentWriter.types";
+import { Rate } from "antd";
 
 export const Wrapper = styled.div`
   width: 1200px;
@@ -36,6 +37,8 @@ export const Input = styled.input`
   font-size: 16px;
   line-height: 24px;
 `;
+
+export const Star = styled(Rate)``;
 
 export const Textarea = styled.textarea`
   display: block;
