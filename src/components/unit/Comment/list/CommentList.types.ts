@@ -1,7 +1,11 @@
-import type { MouseEvent } from "react";
+import type { MouseEvent, ChangeEvent } from "react";
 import type { IQuery } from "@/src/commons/types/generated/types";
 
 export interface ICommentListUIProps {
   data?: Pick<IQuery, "fetchBoardComments">;
-  onClickDelete: (e: MouseEvent<HTMLImageElement>) => void;
+  isModalOpen: boolean;
+  onClickModalShow: (e: MouseEvent<HTMLImageElement>) => void;
+  onClickModalCancel: () => void;
+  onChangePassword: (e: ChangeEvent<HTMLInputElement>) => void;
+  onClickDelete: () => void;
 }

@@ -1,4 +1,6 @@
-import type { MouseEvent } from "react";
+import { useState } from "react";
+import type { MouseEvent, ChangeEvent } from "react";
+
 import type { IMutation, IMutationDeleteBoardCommentArgs, IQuery, IQueryFetchBoardCommentsArgs } from "@/src/commons/types/generated/types";
 import CommentListUI from "./CommentList.presenter";
 import {
@@ -10,6 +12,12 @@ import { useRouter } from "next/router";
 
 export default function CommentList() {
   const router = useRouter();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [deleteComment, setDeleteComment] = useState({
+    id: "",
+    password: ""
+  })
+
 
   const { data } = useQuery<Pick<IQuery, "fetchBoardComments">, IQueryFetchBoardCommentsArgs>(FETCH_BOARD_COMMENTS, {
     variables: {
@@ -18,14 +26,26 @@ export default function CommentList() {
   });
   const [deleteBoardComment] = useMutation<Pick<IMutation, "deleteBoardComment">, IMutationDeleteBoardCommentArgs>(DELETE_BOARD_COMMENT);
 
+  const onClickModalShow = (e: MouseEvent<HTMLImageElement>) => {
+    console.log(e.currentTarget.id)
+    setIsModalOpen(true);
+    setDeleteComment({ ...deleteComment, id: e.currentTarget.id })
+  };
 
-  const onClickDelete = async (e: MouseEvent<HTMLImageElement>) => {
+  const onClickModalCancel = () => {
+    setIsModalOpen(false);
+  };
+
+  const onChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
+    setDeleteComment({ ...deleteComment, password: e.target.value })
+  }
+
+  const onClickDelete = async () => {
     try {
-      const password = prompt("비밀번호를 입력해주세요.");
       await deleteBoardComment({
         variables: {
-          password,
-          boardCommentId: e.currentTarget.id,
+          boardCommentId: deleteComment.id,
+          password: deleteComment.password
         },
         refetchQueries: [
           {
@@ -37,6 +57,7 @@ export default function CommentList() {
         ],
       });
       alert("댓글이 삭제되었습니다.");
+      onClickModalCancel()
     } catch (error) {
       if (error instanceof Error) alert(error.message)
     }
@@ -45,6 +66,10 @@ export default function CommentList() {
   return (
     <CommentListUI
       data={data}
+      isModalOpen={isModalOpen}
+      onClickModalShow={onClickModalShow}
+      onClickModalCancel={onClickModalCancel}
+      onChangePassword={onChangePassword}
       onClickDelete={onClickDelete}
     />
   );

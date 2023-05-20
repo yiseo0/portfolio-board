@@ -1,9 +1,9 @@
 import { getDate } from "@/src/commons/libraries/utils";
-import { Rate } from "antd";
 import type { ICommentListUIProps } from "./CommentList.types";
 import * as S from "./CommentList.styles";
+import { Modal, Rate } from "antd";
 
-export default function CommentListUI({ data, onClickDelete }: ICommentListUIProps) {
+export default function CommentListUI({ data, isModalOpen, onClickModalShow, onClickModalCancel, onChangePassword, onClickDelete }: ICommentListUIProps) {
   return (
     <>
       {/* 수정 */}
@@ -45,12 +45,20 @@ export default function CommentListUI({ data, onClickDelete }: ICommentListUIPro
             <S.UpdateIcon src="/images/boardComment/list/icon_option_update.svg" />
             <S.DeleteIcon
               src="/images/boardComment/list/icon_option_delete.svg"
-              id="el.id"
-              onClick={onClickDelete}
+              id={el._id}
+              onClick={onClickModalShow}
             />
           </S.OptionWrapper>
         </S.ItemWrapper>
       ))}
+
+      {
+        isModalOpen &&
+        <Modal title="Basic Modal" open={true} onOk={onClickDelete} onCancel={onClickModalCancel}>
+          비밀번호 입력해주세요
+          <input type="password" onChange={onChangePassword} />
+        </Modal>
+      }
     </>
   );
 }
