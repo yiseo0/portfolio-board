@@ -42,6 +42,11 @@ export default function BoardDetailUI(props: IBoardDetailUIProps) {
           <h3 className="title">{data?.fetchBoard.title}</h3>
           <div className="content">{data?.fetchBoard.contents}</div>
 
+          {
+            data?.fetchBoard?.youtubeUrl &&
+            <S.Youtube url={data?.fetchBoard?.youtubeUrl} width={486} height={240} />
+          }
+
           <S.LikeButtonWrap >
             <S.LikeButton onClick={onClickLike}>
               <S.LikeIcon src="/images/board/detail/icon_Like.svg" />

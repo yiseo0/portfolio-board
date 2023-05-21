@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import type { ILikeButtonProps, IMapTooltipProps } from "./BoardDetail.types";
+import ReactPlayer from "react-player";
 
 export const Wrapper = styled.div`
   position: relative;
@@ -88,6 +89,10 @@ export const BoardDetailBody = styled.div`
   }
 `;
 
+export const Youtube = styled(ReactPlayer)`
+  margin: 120px auto 0;
+`;
+
 export const BoardDetailButtonWrap = styled.div`
   width: 1200px;
   margin: 0 auto;
@@ -114,7 +119,7 @@ export const LikeButtonWrap = styled.span`
   display: flex;
   justify-content: center;
   gap: 40px;
-  margin: 160px auto 0;
+  margin: 120px auto 0;
   font-weight: 400;
   font-size: 18px;
   line-height: 27px;

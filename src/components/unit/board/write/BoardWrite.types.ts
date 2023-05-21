@@ -11,6 +11,7 @@ export interface IUpdateBoardInput {
   title?: string;
   contents?: string;
   boardAddress?: boardAddress;
+  youtubeUrl?: string;
 }
 
 export interface IBoardWriteUIProps {

@@ -43,14 +43,6 @@ export default function BoardDetail() {
     }
   };
 
-  const onClickMoveToEdit = () => {
-    void router.push(`/boards/${String(router.query.id)}/edit`);
-  };
-
-  const onClickMoveToList = () => {
-    void router.push(`/boards`);
-  };
-
   // 좋아요
   const onClickLike = async () => {
     try {
@@ -85,6 +77,14 @@ export default function BoardDetail() {
       if (error instanceof Error) alert(error.message)
     }
   }
+
+  const onClickMoveToEdit = () => {
+    void router.push(`/boards/${String(router.query.id)}/edit`);
+  };
+
+  const onClickMoveToList = () => {
+    void router.push(`/boards`);
+  };
 
   return (
     <BoardDetailUI

@@ -3,10 +3,10 @@ import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.queries";
-import type { IBoardWriteUIProps, IUpdateBoardInput } from "./BoardWrite.types";
+import type { IBoardWriteUIProps } from "./BoardWrite.types";
 import type { IMutation, IMutationCreateBoardArgs, IMutationUpdateBoardArgs } from "@/src/commons/types/generated/types";
 import type { Address } from 'react-daum-postcode';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function BoardWrite({ isEdit, data }: Pick<IBoardWriteUIProps, "isEdit" | "data">) {
   const router = useRouter();
@@ -16,14 +16,22 @@ export default function BoardWrite({ isEdit, data }: Pick<IBoardWriteUIProps, "i
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  useEffect(() => {
+    if (isEdit) {
+      setValue("title", data?.fetchBoard.title);
+      setValue("contents", data?.fetchBoard.contents);
+      setValue("youtubeUrl", data?.fetchBoard.youtubeUrl);
+    }
+  }, [data])
+
   const [isOpen, setIsOpen] = useState(false);
 
   const [createBoard] = useMutation<Pick<IMutation, "createBoard">, IMutationCreateBoardArgs>(CREATE_BOARD);
   const [updateBoard] = useMutation<Pick<IMutation, "updateBoard">, IMutationUpdateBoardArgs>(UPDATE_BOARD);
 
-  console.log(data)
   const onSubmit = async (data: any) => {
-    const { writer, password, title, contents, zipcode, address, addressDetail } = data;
+    const { writer, password, title, contents, zipcode, address, addressDetail, youtubeUrl } = data;
     try {
       const result = await createBoard({
         variables: {
@@ -36,7 +44,8 @@ export default function BoardWrite({ isEdit, data }: Pick<IBoardWriteUIProps, "i
               zipcode,
               address,
               addressDetail
-            }
+            },
+            youtubeUrl
           },
         },
       });
@@ -55,22 +64,20 @@ export default function BoardWrite({ isEdit, data }: Pick<IBoardWriteUIProps, "i
   };
 
   const onSubmitUpdate = async (data: any) => {
-    const { title, contents, zipcode, address, addressDetail } = data;
-
-    const updateBoardInput: IUpdateBoardInput = {};
-    if (title) updateBoardInput.title = title;
-    if (contents) updateBoardInput.contents = contents;
-    if (zipcode || address || addressDetail) {
-      updateBoardInput.boardAddress = {}
-      if (zipcode) updateBoardInput.boardAddress.zipcode = zipcode;
-      if (address) updateBoardInput.boardAddress.address = address;
-      if (addressDetail) updateBoardInput.boardAddress.addressDetail = addressDetail;
-    }
+    const { title, contents, zipcode, address, addressDetail, youtubeUrl } = data;
 
     try {
       await updateBoard({
         variables: {
-          updateBoardInput,
+          updateBoardInput: {
+            title,
+            contents,
+            boardAddress: {
+              zipcode,
+              address,
+              addressDetail,
+            }, youtubeUrl,
+          },
           password: data.password,
           boardId: String(router.query.id),
         },
