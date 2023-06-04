@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import LayoutHeader from "./header/LayoutHeader.container";
+import LayoutNavigation from "./navigation/LayoutNavigation.container";
 
 interface ILayoutProps {
    children: JSX.Element;
@@ -14,7 +15,7 @@ export default function Layout(props: ILayoutProps) {
       <>
          <LayoutHeader />
          {/* <LayoutBanner /> */}
-         {/* <LayoutNavigation /> */}
+         <LayoutNavigation />
          <Body>{props.children}</Body>
       </>
    );
