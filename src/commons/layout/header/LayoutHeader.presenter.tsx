@@ -1,10 +1,7 @@
 import * as S from "./LayoutHeader.styles";
+import { ILayoutHeaderUIProps } from "./LayoutHeader.types";
 
-interface ILayoutHeaderUIProps {
-   onClickLogo: () => void;
-   onClickLogin: () => void;
-   onClickJoin: () => void;
-}
+
 export default function LayoutHeaderUI({ onClickLogo, onClickLogin, onClickJoin }: ILayoutHeaderUIProps) {
    return (
       <S.Wrapper>
