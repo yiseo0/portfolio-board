@@ -50,7 +50,8 @@ export const Slider = styled(Carousel)`
   .slick-prev {
     margin-left: -600px;
   }
-  .slick-next {
+  .slick-next,
+  .slick-next:hover {
     margin-left: 600px;
     background-position-x: 100% !important;
   }
