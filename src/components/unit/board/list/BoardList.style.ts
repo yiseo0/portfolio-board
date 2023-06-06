@@ -1,6 +1,4 @@
-import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import type { IPagingItemProps } from "./BoardList.types";
 
 export const Wrapper = styled.div`
   position: relative;
@@ -87,29 +85,6 @@ export const ColumnTitle = styled.td`
   cursor: pointer;
 `;
 
-export const Paging = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-`;
-
-export const PagingItem = styled.span`
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 19px;
-  color: #4f4f4f;
-  cursor: pointer;
-  img {
-    vertical-align: bottom;
-  }
-  ${(props: IPagingItemProps) =>
-    props.active === "active" &&
-    css`
-      color: #ffd600;
-      text-decoration: underline;
-    `}
-`;
 export const ButtonWrite = styled.button`
   position: absolute;
   top: 50%;

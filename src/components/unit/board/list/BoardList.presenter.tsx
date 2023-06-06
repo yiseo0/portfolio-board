@@ -1,9 +1,10 @@
 import * as S from "./BoardList.style";
 import { getDate } from "@/src/commons/libraries/utils";
 import type { IBoardListUIProps } from "./BoardList.types";
+import Pagination from "@/src/components/commons/Pagination";
 
 export default function BoardListUI(props: IBoardListUIProps) {
-  const { data, onClickMoveToDetail, onClickMoveToWrite } = props
+  const { data, refetch, dataBoardsCount, onClickMoveToDetail, onClickMoveToWrite } = props
   return (
     <S.Wrapper>
       <S.Search>
@@ -44,16 +45,7 @@ export default function BoardListUI(props: IBoardListUIProps) {
         </tbody>
       </S.Table>
       <S.TableBottom>
-        <S.Paging>
-          <S.PagingItem>
-            <img src="/icon/icon_navi_before.svg" alt="" />
-          </S.PagingItem>
-          <S.PagingItem active="active">1</S.PagingItem>
-          <S.PagingItem>2</S.PagingItem>
-          <S.PagingItem>
-            <img src="/icon/icon_navi_next.svg" alt="" />
-          </S.PagingItem>
-        </S.Paging>
+        <Pagination refetch={refetch} dataTotalCount={dataBoardsCount} viewPageLength={5} />
         <S.ButtonWrite onClick={onClickMoveToWrite}>
           <img src="/icon/icon_create.svg" alt="" />
           게시물 등록하기
