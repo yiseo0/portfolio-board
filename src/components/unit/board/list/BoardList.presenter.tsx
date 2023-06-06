@@ -4,7 +4,7 @@ import type { IBoardListUIProps } from "./BoardList.types";
 import Pagination from "@/src/components/commons/Pagination";
 
 export default function BoardListUI(props: IBoardListUIProps) {
-  const { data, refetch, dataBoardsCount, onClickMoveToDetail, onClickMoveToWrite } = props
+  const { data, refetch, count, onClickMoveToDetail, onClickMoveToWrite } = props
   return (
     <S.Wrapper>
       <S.Search>
@@ -45,7 +45,7 @@ export default function BoardListUI(props: IBoardListUIProps) {
         </tbody>
       </S.Table>
       <S.TableBottom>
-        <Pagination refetch={refetch} dataTotalCount={dataBoardsCount} viewPageLength={5} />
+        <Pagination refetch={refetch} count={count} viewPageLength={5} />
         <S.ButtonWrite onClick={onClickMoveToWrite}>
           <img src="/icon/icon_create.svg" alt="" />
           게시물 등록하기

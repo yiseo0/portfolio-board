@@ -8,7 +8,7 @@ export interface IPagerItemProps {
 }
 export interface IPaginationProps {
    refetch: any;
-   dataTotalCount: number
+   count?: number
    viewPageLength?: number
 }
 
@@ -42,8 +42,8 @@ export default function Pagination(props: IPaginationProps) {
    const { refetch } = props
    const [startPage, setStartPage] = useState(1)
    const [currentPage, setCurrentPage] = useState(startPage)
-
-   const lastPage = Math.ceil((props.dataTotalCount || 10) / 10)
+   const lastPage = Math.ceil((props.count ??
+       10) / 10)
    const viewPageLength = props.viewPageLength ?? 5
 
    const onClickPage = (e: MouseEvent<HTMLSpanElement>) => {
