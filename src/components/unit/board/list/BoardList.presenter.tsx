@@ -1,10 +1,10 @@
 import * as S from "./BoardList.style";
 import { getDate } from "@/src/commons/libraries/utils";
 import type { IBoardListUIProps } from "./BoardList.types";
-import Pagination from "@/src/components/commons/Pagination";
+import Pagination from "@/src/components/commons/pagination/Pagination.container";
 
 export default function BoardListUI(props: IBoardListUIProps) {
-  const { data, refetch, count, onClickMoveToDetail, onClickMoveToWrite } = props
+  const { data, refetch, count, currentPage, setCurrentPage, onClickMoveToDetail, onClickMoveToWrite } = props
   return (
     <S.Wrapper>
       <S.Search>
@@ -34,7 +34,7 @@ export default function BoardListUI(props: IBoardListUIProps) {
         <tbody>
           {data?.fetchBoards.map((list: any, idx: number) => (
             <tr key={list._id}>
-              <td>{data.fetchBoards.length - idx}</td>
+              <td>{(currentPage - 1) * 10 + idx + 1}</td>
               <S.ColumnTitle id={list._id} onClick={onClickMoveToDetail}>
                 {list.title}
               </S.ColumnTitle>
@@ -45,7 +45,7 @@ export default function BoardListUI(props: IBoardListUIProps) {
         </tbody>
       </S.Table>
       <S.TableBottom>
-        <Pagination refetch={refetch} count={count} viewPageLength={5} />
+        <Pagination refetch={refetch} count={count} currentPage={currentPage} setCurrentPage={setCurrentPage} viewPageLength={5} />
         <S.ButtonWrite onClick={onClickMoveToWrite}>
           <img src="/icon/icon_create.svg" alt="" />
           게시물 등록하기
